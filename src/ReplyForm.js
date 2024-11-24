@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { useState } from "react";
 
-export default function ReplyForm() {
-    const [comment, setComment] = useState("");
+export default function ReplyForm({ onSubmit }) {
+    const [replyText, setReplyText] = useState("");
+
+    const handleSubmit = (event) => {
+    event.preventDefault();
+    if (replyText.trim()) {
+        onSubmit(replyText);
+        setReplyText(""); // Clear the input field
+    }
+    };
 
     return (
-        <div>
-            <img src="public/images/avatars/image-juliusomo.png"></img>
-            <label>
-                <input name="commentSubmit" value={comment}></input>
-            </label>
-            <button type="submit">Send</button>
-        </div>
-  );
+    <form onSubmit={handleSubmit} className="reply-form">
+        <input
+        type="text"
+        value={replyText}
+        onChange={(e) => setReplyText(e.target.value)}
+        placeholder="Add your reply..."
+        />
+        <button type="submit">Reply</button>
+    </form>
+    );
 }

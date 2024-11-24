@@ -1,24 +1,23 @@
-import React from 'react';
-import VoteButton from './VoteButton';
-import ReplyButton from './ReplyButton';
+import React from "react";
 
-export default function Replies(props) {
-    if (props.replies) {
-        return (
-            <>
-                {props.replies.map((reply) => (
-                    <div key={reply.id}>
-                        <div className="header">
-                            <img src={reply.user.image.png}/>
-                            <p>{reply.user.username}</p>
-                            <p>{reply.createdAt}</p>
-                        </div>
-                        <p>@{reply.replyingTo} {reply.content}</p>
-                        <VoteButton score={reply.score} />
-                        <ReplyButton />
-                    </div>
-                ))}
-            </>
-        );
-    }
+export default function Replies({ replies, addReply }) {
+    return (
+    <div className="replies flex flex-col">
+        {replies.map((reply) => (
+        <div key={reply.id} className="reply">
+            <div className="header">
+            <img
+                src={reply.user.image.png}
+                alt={`${reply.user.username}'s avatar`}
+            />
+            <p>
+                {reply.user.username} replying to @{reply.replyingTo}
+            </p>
+            <p>{reply.createdAt}</p>
+            </div>
+            <p>{reply.content}</p>
+        </div>
+        ))}
+    </div>
+    );
 }
