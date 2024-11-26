@@ -12,14 +12,14 @@ export default function ReplyForm({ onSubmit }) {
     };
 
     return (
-    <form onSubmit={handleSubmit} className="reply-form">
-        <input
-        type="text"
-        value={replyText}
-        onChange={(e) => setReplyText(e.target.value)}
-        placeholder="Add your reply..."
-        />
-        <button type="submit">Reply</button>
-    </form>
+        <form onSubmit={handleSubmit} className="reply-form">
+            <input
+            type="text"
+            value={replyText}
+            onChange={(e) => setReplyText(e.target.value)}
+            placeholder="Add your reply..."
+            />
+            <button type="submit">Reply</button>
+        </form>
     );
 }
