@@ -1,16 +1,13 @@
 import React, { useState } from "react";
-import ReplyForm from "./ReplyForm";
 import ProfileHeader from "./ProfileHeader";
 import LikeButton from "./LikeButton.js";
 
-export default function Comment({ comment, addReply }) {
-  const [showReplyForm, setShowReplyForm] = useState(false);
-
-  const handleAddReply = (replyText) => {
-    addReply(comment.id, replyText, comment.user.username);
-    setShowReplyForm(false);
-  };
-
+export default function Comment({ comment, showReply, user}) {
+    console.log("Comment User:", comment.user.username); // Debugging log
+    console.log("Current User Prop:", user); // Debugging log
+    const isUser = user ? comment.user.username === user : false; // Handle undefined user
+    console.log("Is Current User:", isUser); // Debugging log
+    
   return (
     <div className="comment w-full p-8 flex flex-col bg-white rounded-lg m-3 mb-6 shadow-lg">
       <div className="flex justify-start w-full space-x-6">
@@ -18,8 +15,10 @@ export default function Comment({ comment, addReply }) {
         <div className="main-content">
           <ProfileHeader
             user={comment.user}
+            isUser={isUser}
+            commentID={comment.id}
             createdAt={comment.createdAt}
-            onReplyClick={() => setShowReplyForm(!showReplyForm)}
+            onReplyClick={showReply}
           />
           <p className="mt-4 text-gray-500">
             {comment.replyingTo && (
@@ -31,12 +30,6 @@ export default function Comment({ comment, addReply }) {
           </p>
         </div>
       </div>
-
-      {showReplyForm && (
-        <div className="reply-form w-full mt-4 pl-8">
-          <ReplyForm onSubmit={handleAddReply} />
-        </div>
-      )}
     </div>
   );
 }

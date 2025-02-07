@@ -9,7 +9,11 @@ module.exports = {
         'reply-color': '#403f92',
         'plus-minus-color': '#c7c7e5',
         'likes-bg-color': '#f5f6f9',
+        'delete-color' : '#ED6368',
       },
+      fontFamily: {
+        Rubik: ["Rubik", "sans-serif"]
+      }
     },
   },
   plugins: [],
